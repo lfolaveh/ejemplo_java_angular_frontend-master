@@ -1,0 +1,92 @@
+<div class="Container100">
+    <div class="ContainerIndent">
+        <div class="Card ShadowEffect">
+            <div class="Container100">
+                <div class="ContainerIndent">
+                    <h3>Crear Usuario</h3>
+                </div>
+                <div class="panel-body">
+                    <div layout="column" ng-cloak class="md-inline-form">
+                        <md-content layout-padding>
+                            <form name="dataForm" novalidate ng-submit="vm.create()" class="col-md-offset-2 col-md-8">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Tipo Documento</label>
+                                    <md-select name="tipoDocumento" ng-model="vm.selected.tipoDocumento">
+                                        <md-option ng-value="item" ng-repeat="item in vm.tiposDocumentosList">
+                                            {{item.id}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="dataForm.tipoDocumento.$error">
+                                        <div ng-message="required">Este campo es requerido.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Número Documento</label>
+                                    <input required maxlength="15" ng-pattern="/^[0-9]+$/" name="numDocumento" ng-model="vm.selected.numDocumento">
+                                    <div ng-messages="dataForm.numDocumento.$error" role="alert">
+                                        <div ng-message="required">Este campo es requerido.</div>
+                                        <div ng-message="maxlength">No puede superar 15 caracteres.</div>
+                                        <div ng-message="pattern">Solo puede ingresar Números.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Nombres</label>
+                                    <input name="nombres" ng-model="vm.selected.nombres" md-maxlength="40" required>
+                                    <div ng-messages="dataForm.nombres.$error">
+                                        <div ng-message="required">Este campo es requerido.</div>
+                                        <div ng-message="md-maxlength"> No puede superar 40 caracteres.</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Apellidos</label>
+                                    <input name="apellidos" ng-model="vm.selected.apellidos" md-maxlength="40">
+                                    <div ng-messages="dataForm.apellidos.$error">
+                                        <div ng-message="required">Este campo es requerido.</div>
+                                        <div ng-message="md-maxlength">No puede superar 40 caracteres.</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Email</label>
+                                    <input type="email" required name="email" ng-model="vm.selected.email">
+                                    <div ng-messages="dataForm.email.$error">
+                                        <div ng-message="required">Este campo es requerido.</div>
+                                        <!-- <div ng-message="md-maxlength"> no puede superar x caracteres.</div> -->
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Sexo</label>
+                                    <md-select ng-required="true" name="sexo" ng-model="vm.selected.sexo">
+                                        <md-option ng-repeat="item in vm.sexo" ng-value="item.id">
+                                            {{item.nombre}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="dataForm.sexo.$error">
+                                        <div ng-message="required">Este campo es requerido.</div>
+                                        <!-- <div ng-message="md-maxlength"> no puede superar x caracteres.</div> -->
+                                    </div>
+                                </md-input-container>
+
+                                <div layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                                    <md-button type="submit" class="md-raised md-primary" title="Crear Usuarios" aria-label="Crear Usuarios">
+                                        <md-icon md-font-icon="fa-floppy-o" class="fa md-primary md-hue-2">
+                                            Guardar</md-icon>
+                                    </md-button>
+                                    <md-button type="button" ui-sref="usuarios" class="md-raised md-primary" title="Regresar Usuarios" aria-label="Regresar Usuarios">
+                                        <md-icon md-font-icon="fa-arrow-left" class="fa md-primary md-hue-2">
+                                            Regresar</md-icon>
+                                    </md-button>
+                                </div>
+                            </form>
+                        </md-content>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

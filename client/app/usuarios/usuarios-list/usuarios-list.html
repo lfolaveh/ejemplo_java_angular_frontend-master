@@ -1,0 +1,142 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Listado de Usuarios
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="col-md-12">
+                    <form class="form-inline">
+                        <div layout-gt-xs="row" layout-sm="column" layout-align="center center" layout-wrap>
+                            <span flex></span>
+                            <md-button type="button" ng-click="vm.clearQuery()" class="md-raised md-primary md-hue-2" title="Limpiar filtros" aria-label="Limpiar filtro">
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpiar Filtros
+                            </md-button>
+                            <md-button type="button" ng-click="vm.exportExcel()" class="md-raised md-primary md-hue-2" title="Exportar Excel" aria-label="Exportar Excel">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i> Usuarios
+                            </md-button>
+                        </div>
+                    </form>
+                    <md-table-container>
+                        <table md-table md-progress="vm.promise" class="table table-condensed table-striped dataTable">
+                            <thead md-head>
+                                <tr md-row>
+                                    <th md-column>
+                                        <span>Tipo Documento</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Número Documento</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Nombres</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Apellidos</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Email</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Sexo</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Estado</span>
+                                    </th>
+                                    <th md-column>
+                                        <span>Foto</span>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <tr md-row>
+                                    <div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Activo</label>
+                                                <md-select name="validado" ng-change="vm.selectedValidado()" ng-model="vm.selected.activo">
+
+                                                    <md-option ng-value="true">
+                                                        Si
+                                                    </md-option>
+                                                    <md-option ng-value="false">
+                                                        No
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Sexo</label>
+                                                <md-select name="sexoUsuario" ng-change="vm.selectedValidado()" ng-model="vm.selected.sexo">
+                                                    <md-option ng-repeat="item in vm.sexo" ng-value="item.id">
+                                                        {{item.nombre}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Tipo Documento</label>
+                                                <md-select name="tipoDocumento" ng-change="vm.selectedValidado()" ng-model="vm.selected.tipoDocumento">
+                                                    <md-option ng-repeat="item in vm.tiposDocumentosList" ng-value="item.id">
+                                                        {{item.id}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                         <div class="col-lg-4 col-md-4 col-sm-6">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Tipo Documento</label>
+                                                <md-select name="Nombres" ng-change="vm.selectedValidado()" ng-model="vm.selected.nombres">
+                                                    <md-option ng-repeat="item in vm.usuariosList" ng-value="item.id">
+                                                        {{item.nombres}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </thead>
+                            <tbody md-body>
+                                <tr md-row ng-repeat="item in vm.usuariosList">
+                                    <td md-cell>{{item.tipoDocumento.id}}</td>
+                                    <td md-cell>{{item.numDocumento}}</td>
+                                    <td md-cell>{{item.nombres}}</td>
+                                    <td md-cell>{{item.apellidos}}</td>
+                                    <td md-cell>{{item.email}}</td>
+                                    <td md-cell>{{item.sexo}}</td>
+                                    <td md-cell>
+                                        <md-switch ng-disabled="true" ng-model="item.activo" aria-label="Estado" class="md-primary">
+
+                                        </md-switch>
+                                    </td>
+                                    <td md-cell>
+                                        <img ng-src="./assets/{{item.urlImagen}}" width="60" height="60" alt="Imagen Usuario" />
+                                    </td>
+                                    <td md-cell>
+                                        <div class="lock-size" layout="row" layout-align="center center">
+                                            <md-button ng-show="item.isAgricultor" ui-sref="usuariosAsociacion({id: item.idUsuario})" class="md-icon-button" title="Asociaciones" aria-label="Asociaciones">
+                                                <md-icon md-font-icon="fa-users" class="fa md-primary md-hue-2"></md-icon>
+                                            </md-button>
+                                            <md-button ui-sref="usuariosView({id: item.idUsuario})" class="md-icon-button" title="Ver" aria-label="Ver">
+                                                <md-icon md-font-icon="fa-eye" class="fa md-primary md-hue-2"></md-icon>
+                                            </md-button>
+                                            <md-button ui-sref="usuariosUpdate({id: item.idUsuario})" class="md-icon-button" title="Editar" aria-label="Editar">
+                                                <md-icon md-font-icon="fa-pencil" class="fa md-primary md-hue-2"></md-icon>
+                                            </md-button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                    <md-table-pagination ng-show="vm.usuariosLength > 0" md-limit="vm.query.limit" md-boundary-links md-page-select md-on-paginate="vm.onPaginate" md-limit-options="[5, 10, 20, 50]" md-page="vm.query.page" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                        md-total="{{vm.usuariosLength}}"></md-table-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
